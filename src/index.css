@@ -1,0 +1,549 @@
+@import url(https://db.onlinewebfonts.com/c/68b898f6044bbee439423445076f3168?family=Roxborough+CF+Thin);
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Marcellus&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url(https://db.onlinewebfonts.com/c/68b898f6044bbee439423445076f3168?family=Roxborough+CF+Bold);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 760px) {
+  * {
+    overflow-y: auto;
+    
+  }
+}
+
+/* For large screens (lg and xl) */
+@media (min-width: 768px) {
+  * {
+    overflow-y: inherit;
+  }
+}
+
+.aboutSection .heroSection {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.aboutSection .heroSection .banner img {
+  width: 100%;
+}
+
+.aboutSection .heroSection .banner .mobile {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .aboutSection .heroSection .banner .mobile {
+    display: block;
+  }
+
+  .aboutSection .heroSection .banner .desktop {
+    display: none;
+  }
+}
+
+.aboutSection .heroSection .content {
+  position: absolute;
+  width: 35%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+}
+
+@media screen and (max-width: 450px) {
+  .aboutSection .heroSection .content {
+    padding: 10px 30px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .aboutSection .heroSection .content {
+    width: 60%;
+    top: 60%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .aboutSection .heroSection .content {
+    width: 90%;
+    top: 40%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .aboutSection .heroSection .content {
+    top: 42%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .aboutSection .heroSection .content {
+    top: 45%;
+  }
+}
+
+.aboutSection .heroSection .content h1 {
+  color: #642f29;
+  text-align: center;
+  font-family: "roxborough_cfbold";
+  font-size: calc(38px + 0.2vw);
+  max-width: 700px;
+  width: 100%;
+}
+
+@media screen and (max-width: 1400px) {
+  .aboutSection .heroSection .content h1 {
+    font-size: calc(30px + 0.2vw);
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .aboutSection .heroSection .content h1 {
+    font-size: calc(28px + 0.2vw);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .aboutSection .heroSection .content h1 {
+    font-size: calc(35px + 0.2vw);
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .aboutSection .heroSection .content h1 {
+    font-size: calc(30px + 0.2vw);
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .aboutSection .heroSection .content h1 {
+    font-size: calc(28px + 0.2vw);
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .aboutSection .heroSection .content h1 {
+    font-size: calc(25px + 0.2vw);
+  }
+}
+
+.aboutSection .heroSection .content p {
+  color: #642f29;
+  text-align: center;
+  font-size: calc(15px + 0.2vw);
+}
+
+@media screen and (max-width: 1200px) {
+  .aboutSection .heroSection .content p {
+    font-size: calc(14px + 0.2vw);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .aboutSection .heroSection .content p {
+    font-size: calc(15px + 0.2vw);
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .aboutSection .heroSection .content p {
+    font-size: calc(14px + 0.2vw);
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .aboutSection .heroSection .content p {
+    font-size: calc(13px + 0.2vw);
+  }
+}
+
+.aboutSection .history {
+  background-color: #feeee2;
+  padding: 118px 0;
+}
+
+@media screen and (max-width: 430px) {
+  .aboutSection .history {
+    padding: 80px 0;
+  }
+}
+
+.aboutSection .history .content {
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.aboutSection .history .content .history-pictures {
+  position: relative;
+}
+
+.aboutSection .history .content .history-pictures .path {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 50px;
+}
+
+@media screen and (max-width: 1200px) {
+  .aboutSection .history .content .history-pictures .path {
+    display: block;
+    display: flex;
+    justify-content: center;
+    top: 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .aboutSection .history .content .history-pictures .path {
+    top: 60px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .aboutSection .history .content .history-pictures .path {
+    top: 0px;
+  }
+}
+
+.aboutSection .history .content .history-pictures .path .desktop {
+  width: 90%;
+}
+
+@media screen and (max-width: 1200px) {
+  .aboutSection .history .content .history-pictures .path .desktop {
+    display: none;
+  }
+}
+
+.aboutSection .history .content .history-pictures .path .mobile {
+  display: none;
+}
+
+@media screen and (max-width: 1200px) {
+  .aboutSection .history .content .history-pictures .path .mobile {
+    display: block;
+    width: 600px;
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .aboutSection .history .content .history-pictures .path .mobile {
+    width: 600px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .aboutSection .history .content .history-pictures .path .mobile {
+    width: 98%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .aboutSection .history .content .history-pictures .path .mobile {
+    height: 800px;
+  }
+}
+
+.aboutSection .history .content .history-pictures .box {
+  position: relative;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.aboutSection .history .content .history-pictures .box h3 {
+  color: #642f29;
+  font-family: "roxborough_cfmedium";
+  margin: 0px;
+  text-align: center;
+}
+
+.aboutSection .history .content .history-pictures .box span {
+  color: #642f29;
+  font-size: calc(12px + 0.2vw);
+}
+
+.aboutSection .history .content .history-pictures .history-1 {
+  position: relative;
+}
+
+@media screen and (max-width: 500px) {
+  .aboutSection .history .content .history-pictures .history-1 {
+    padding: 10px;
+    margin-top: 1rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .aboutSection .history .content .history-pictures .history-1 {
+    margin-top: -1rem;
+  }
+}
+
+.aboutSection .history .content .history-pictures .history-1 img {
+  width: 200px;
+}
+
+@media screen and (max-width: 500px) {
+  .aboutSection .history .content .history-pictures .history-1 img {
+    width: 100%;
+  }
+}
+
+.aboutSection .history .content .history-pictures .history-1 h3 {
+  font-size: calc(23px + 0.2vw);
+}
+
+@media screen and (max-width: 1201px) {
+  .aboutSection .history .content .history-pictures .history-1 h3 {
+    font-size: calc(20px + 0.2vw);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .aboutSection .history .content .history-pictures .history-1 h3 {
+    font-size: calc(19px + 0.2vw);
+  }
+}
+
+.aboutSection .history .content .history-pictures .history-2 {
+  margin-top: 10rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .aboutSection .history .content .history-pictures .history-2 {
+    margin-top: 15rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .aboutSection .history .content .history-pictures .history-2 {
+    padding: 10px;
+    margin-top: 16rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .aboutSection .history .content .history-pictures .history-2 {
+    margin-top: 15rem;
+  }
+}
+
+.aboutSection .history .content .history-pictures .history-2 img {
+  width: 150px;
+}
+
+@media screen and (max-width: 1200px) {
+  .aboutSection .history .content .history-pictures .history-2 img {
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .aboutSection .history .content .history-pictures .history-2 img {
+    width: 75%;
+    /* margin-left: auto; */
+  }
+}
+
+.aboutSection .history .content .history-pictures .history-2 h3 {
+  font-size: calc(20px + 0.2vw);
+}
+
+@media screen and (max-width: 1200px) {
+  .aboutSection .history .content .history-pictures .history-2 h3 {
+    font-size: calc(20px + 0.2vw);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .aboutSection .history .content .history-pictures .history-2 h3 {
+    font-size: calc(19px + 0.2vw);
+  }
+}
+
+.aboutSection .history .content .history-pictures .history-3 {
+  margin-top: 15rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .aboutSection .history .content .history-pictures .history-3 {
+    margin-top: -3rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .aboutSection .history .content .history-pictures .history-3 {
+    padding: 10px;
+    margin-top: -3rem;
+  }
+}
+
+.aboutSection .history .content .history-pictures .history-3 img {
+  width: 180px;
+}
+
+@media screen and (max-width: 1200px) {
+  .aboutSection .history .content .history-pictures .history-3 img {
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .aboutSection .history .content .history-pictures .history-3 img {
+    width: 90%;
+    margin-right: auto;
+  }
+}
+
+.aboutSection .history .content .history-pictures .history-3 h3 {
+  font-size: calc(22px + 0.2vw);
+}
+
+@media screen and (max-width: 1200px) {
+  .aboutSection .history .content .history-pictures .history-3 h3 {
+    font-size: calc(20px + 0.2vw);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .aboutSection .history .content .history-pictures .history-3 h3 {
+    font-size: calc(19px + 0.2vw);
+  }
+}
+
+.aboutSection .history .content .history-pictures .history-4 {
+  margin-top: 2rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .aboutSection .history .content .history-pictures .history-4 {
+    margin-top: 13rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .aboutSection .history .content .history-pictures .history-4 {
+    padding: 10px;
+    margin-top: 8rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .aboutSection .history .content .history-pictures .history-4 {
+    margin-top: 5rem;
+  }
+}
+
+.aboutSection .history .content .history-pictures .history-4 img {
+  width: 140px;
+}
+
+@media screen and (max-width: 1200px) {
+  .aboutSection .history .content .history-pictures .history-4 img {
+    width: 200px;
+  }
+}
+
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 4px solid #3498db;
+  width: 30px;
+  height: 30px;
+  -webkit-animation: spin 1s linear infinite;
+  /* Safari */
+  animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.hover\:zoom-in:hover {
+  transform: scale(1.1);
+  /* Zoom in by 10% */
+}
+
+.slider {
+  transition: transform 0.5s ease;
+  /* Add transition for smooth animation */
+}
+
+.slick-prev {
+  left: 0;
+  /* Adjust position of the Prev button */
+}
+
+.slick-next {
+  right: 0;
+  /* Adjust position of the Next button */
+}
+
+
+.overflow-x-auto::-webkit-scrollbar {
+  display: none;
+}
+
+/* Optional: Define scrollbar styles for other browsers */
+.overflow-x-auto {
+  scrollbar-width: none; /* Firefox */
+}
+
+.fixed-scroll {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  /* Adjust as needed */
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
+.custom-toast-error {
+  /* background-color: white; */
+  /* Set your desired background color for error toasts */
+  margin-top: 50px;
+}
+
