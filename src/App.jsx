@@ -7,7 +7,7 @@ import Home from "./component/Home";
 import Error from "./pages/Error";
 import { PrivateRoute } from "./component/auth/PrivateRoute";
 import RequestSent from "./regestation/RequestSent";
-import PasswordUpdated from "./component/passwordUpdated";
+import PasswordUpdated from "./component/PasswordUpdated";
 import Cart from "./component/Cart";
 import ForgotPassword from "./component/ForgotPassword";
 import ResetPassword from "./component/ResetPassword";
