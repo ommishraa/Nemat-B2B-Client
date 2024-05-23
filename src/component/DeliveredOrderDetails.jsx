@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import OrderDetailsData from './common/orderDetailsData';
+import OrderDetailsData from './common/OrderDetailsData';
 import getToken from './auth/GetToken';
 
 const DeliveredOrderDetails = () => {
