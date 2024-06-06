@@ -278,10 +278,10 @@ const ChangePassword = () => {
               className="p-2 mobile:w-full uppercase  mobile:text-xl text-center rounded-3xl bg-[#60713A] hover:bg-hoverBGGreen text-white font-Marcellus font-normal text-base  leading-17 md:w-[30%] h-[43px] "
               type="submit"
             >
-              Change
+              Update
             </button>
             <p
-              className="p-2 rounded-3xl cursor-pointer mobile:bg-white mobile:w-full md:text-lg font-Marcellus font-normal text-base underline ml-3 uppercase text-[#642F29] bg-green-500"
+              className="p-2 rounded-3xl cursor-pointer mobile:bg-white mobile:w-full md:text-lg font-Marcellus font-bold text-base underline ml-3 uppercase text-[#642F29] bg-green-500"
               onClick={onClickSubmit}
             >
               Do it Later

@@ -157,10 +157,11 @@ const footer = ({ check }) => {
               src={FooterImage}
               alt=""
               style={{ maxWidth: "100%", maxHeight: "100%" }}
+              className="md:w-full mobile:h-[100px] md:h-auto object-cover mt-3"
             />
           </div>
 
-          <div className="w-[100%] mobile:-mt-2 sm:-mt-2 md:-mt-2 lg:-mt-6 h-full overflow-hidden bg-text_Color2 ">
+          <div className="w-[100%] mobile:-mt-4 sm:-mt-2 md:-mt-2 lg:-mt-6 h-full overflow-hidden bg-text_Color2 ">
             <div className="w-full mt-2 mobile:flex sm:flex  mobile:justify-center mobile:items-center sm:items-center md:justify-center md:w-[100%] ">
               <Link to={"/home"}>
                 <img src={logo} className="w-[170px] h-[100px] " />

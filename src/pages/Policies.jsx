@@ -62,12 +62,12 @@ const Policies = () => {
         <NavBars />
       </div>
       <div className="w-full h-auto">
-        <div className="w-full uppercase h-[10.75rem] bg-LightCream text-text_Color font-roxborough font-bold text-xl flex justify-center items-center">
-          <h1 className="">our policies</h1>
+        <div className="w-full uppercase h-[10.75rem] bg-LightCream text-text_Color font-roxborough font-bold text-3xl flex justify-center items-center">
+          <h1 className="md:ml-4 xl:ml-0 xl:mr-4">our policies</h1>
         </div>
 
         <div className="p-2 py-3  w-full mb-2">
-          <img src={Flower} className="w-full" />
+          <img src={Flower} className="w-auto md:h-auto mobile:h-[35px] mobile:object-cover" />
         </div>
 
         {/* HEADIND SECTION */}

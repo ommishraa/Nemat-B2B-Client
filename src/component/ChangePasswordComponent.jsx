@@ -154,7 +154,7 @@ const ChangePasswordComponent = () => {
         <div className="sm:w-full  min-h-[65%] flex justify-center items-center m-auto">
           <div className="sm:w-[95%] mobile:w-[95%] md:w-[90%] md:h-[100%] ">
             <h2 className="overflow-hidden sm:text-2xl sm:text-center mobile:text-center mobile:text-xl  leading-tight text-[#642F29]  font-roxborough md:text-4xl md:text-start md:mb-6  ">
-              Change Password
+              Update Your Password
             </h2>
             <div className="">
               <Toaster />
@@ -287,7 +287,7 @@ const ChangePasswordComponent = () => {
                       className="p-2 rounded-3xl cursor-pointer mobile:bg-white mobile:w-full md:text-lg font-Marcellus font-normal text-base underline ml-3 uppercase text-[#642F29] bg-green-500"
                       onClick={() => navigate(`/profile/${customer_id_Store}`)}
                     >
-                      Do it Later
+                      Cancel
                     </p>
                   </div>
                 </form>

@@ -54,8 +54,8 @@ const Search = () => {
           );
 
           console.log(response.data);
-          setSeriesData(response.data.SeriesData);
-          setProductData(response.data.ProductsData);
+          setSeriesData(response.data);
+          // setProductData(response.data.ProductsData);
         } catch (error) {
           if (error.response) {
             const { status, data } = error.response;
@@ -273,7 +273,7 @@ const Search = () => {
         <NavBars />
       </div>
       <div className="w-full mt-8">
-        <h1 className=" lg:w-[30%] md:w-[40%] overflow-hidden sm:w-[60%] mobile:w-[90%] mx-auto text-3xl font-Marcellus text-text_Color font-semibold text-center">
+        <h1 className=" lg:w-[30%] md:w-[40%] overflow-hidden sm:w-[60%] mobile:w-[90%] mx-auto text-3xl font-RoxboroughCFBold text-text_Color font-medium text-center">
           SEARCH WHAT YOU’RE LOOKING FOR
         </h1>
         <div className="md:w-[50%] lg:w-[40%] sm:w-[70%] mobile:w-[85%] mx-auto mt-8 border-b-2 border-b-[#642F29] ">
@@ -297,10 +297,10 @@ const Search = () => {
 
       {seriesData && seriesData.length > 0 && (
         <div className="mt-10">
-          <div className="font-bold uppercase text-text_Color text-2xl">
+          <div className="font-RoxboroughCFBold font-medium uppercase text-text_Color text-2xl">
             <ProductHeader title={"Series"} />
           </div>
-          <div className="w-full flex justify-center items-center mt-6">
+          <div className="w-full flex justify-center items-center">
             <div className="w-[90%] sm:grid-cols-3 sm:grid mobile:grid mobile:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 mx-auto">
               {seriesData &&
                 seriesData.map((subcategories) => (
@@ -314,17 +314,17 @@ const Search = () => {
                         src={`${import.meta.env.VITE_REACT_APP_BASE_URL}/${
                           subcategories.Image
                         }`}
-                        className="mobile:p-2 sm:p-5 md:p-5 flex justify-center md:h-[400px] lg:h-[370px] object-contain mobile:h-[250px] items-center"
+                        className="mobile:p-2 sm:p-5 md:px-2 flex justify-center md:h-[320px] lg:h-[350px] object-contain mobile:h-[270px] items-center"
                         alt={subcategories?.title}
                       />
                       <h1
-                        className="font-roxborough text-xl text-center w-full text-text_Color mb-4 overflow-hidden overflow-ellipsis"
+                        className="font-RoxboroughCFBold font-medium text-xl text-center w-full text-text_Color mb-4 overflow-hidden overflow-ellipsis"
                         style={{ minHeight: "3em" }}
                       >
                         {subcategories.Name}
                       </h1>
                     </div>
-                    <button className="w-[137px] uppercase h-[43px] hover:bg-[#006400] bg-bg_green rounded-3xl font-Marcellus text-white mb-7">
+                    <button className="w-[137px] uppercase h-[43px] hover:bg-hoverBGGreen bg-bg_green rounded-3xl font-Marcellus text-white mb-7">
                       Order NOW
                     </button>
                   </div>
@@ -334,13 +334,14 @@ const Search = () => {
         </div>
       )}
 
-      {productData && productData.length > 0 && (
+      {/* Product Page Data */}
+      {/* {productData && productData.length > 0 && (
         <div>
           <div className="p-2 py-5  w-full mb-2">
             <img src={Flower} className="w-full object-cover" />
           </div>
 
-          {/* Product Page Data */}
+          
           <div>
             <div className="font-bold uppercase text-text_Color text-2xl">
               <ProductHeader title={"Products"} />
@@ -368,9 +369,6 @@ const Search = () => {
                       <div className="mobile:w-[55%] sm:w-[55%]">
                         <h1 className="mobile:w-full mobile:h-full mobile:flex mobile:items-center  font-roxboroughnormal  md:text-xl lg:text-3xl font-semibold text-text_Color sm:w-full sm:h-full sm:flex sm:items-center">
                           {product.Name}{" "}
-                          {/* <span className="px-2 bg-text_Color text-white rounded-xl md:ml-3">
-                            i
-                          </span> */}
                         </h1>
                       </div>
                       <button
@@ -405,7 +403,7 @@ const Search = () => {
                                   handlePackSizeClick(packsize, index)
                                 }
                               >
-                                {/* Render packsize information */}
+                               
                                 {packsize.size} pcs ({packsize.nameConvention})
                               </button>
                             )
@@ -420,9 +418,9 @@ const Search = () => {
                           <div className="md:w-[73%]">
                             <input
                               type="text"
-                              //  id={`quantity_${index}`}
+                             
                               className="p-2 border-[1px]  border-text_Color text-text_Color font-Marcellus font-normal placeholder:text-text_Color rounded-3xl mobile:w-[100%] sm:w-[100%] mobile:p-2 sm:p-2"
-                              //  value={quantities[index]}
+                           
                               onChange={(event) =>
                                 handleQuantityChange(event, index)
                               }
@@ -457,7 +455,7 @@ const Search = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
       <div className="mt-10">
         <Footer />
       </div>

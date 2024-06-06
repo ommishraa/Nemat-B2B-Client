@@ -14,20 +14,21 @@ const ContactUs = () => {
   const [admininfo, setAdminInfo] = useState();
 
   const objectSchema = yup.object({
-    firstName: yup.string().min(3).required("Please Enter First Name"),
-    lastName: yup.string().min(3).required("Please Enter Last Name"),
+    firstName: yup.string().min(3).required("Please enter first name"),
+    lastName: yup.string().min(3).required("Please enter your surname"),
     userEmail: yup
       .string()
-      .email("Please Enter A valid Email")
+      .email("Please enter a valid email")
       .min(3)
-      .required("Please Enter your Email "),
+      .required("Please enter your email "),
     userMobileNo: yup
       .number()
       .typeError("Please enter a valid number")
       .integer("Please enter a valid number")
-      .min(99999999, "Min 8 Number")
-      .required("Enter the Your Mobile Number"),
-    userMessage: yup.string().min(5).required("Please enter your query."),
+      .min(999999999, "Please enter a valid number")
+      .max(9999999999, "Please enter 10 digit valid number")
+      .required("Please enter your mobile number"),
+    userMessage: yup.string().min(5).required("Please enter your message"),
   });
 
   useEffect(() => {
@@ -149,8 +150,6 @@ const ContactUs = () => {
     }
   };
 
-  // console.log("admininfo ===> ", admininfo);
-
   return (
     <div className="w-[100%] h-auto">
       <NavBars />
@@ -159,31 +158,31 @@ const ContactUs = () => {
         <p></p>
       ) : (
         <div className="w-[100%]">
-          <div className="md:flex md:w-[96%] lg:w-[90%] mx-auto lg:mt-10">
+          <div className="md:flex md:w-[96%] lg:w-[90%] mx-auto lg:mt-10 mobile:mt-5">
             <div className="sm:flex sm:flex-col sm:justify-center sm:items-center sm:w-[100%] mobile:flex mobile:flex-col mobile:justify-center mobile:items-center mobile: w-[100%]  md:items-start md:ml-[3%] md:text-start md:text-lg text-text_Color  font-Marcellus  md:w-[60%]">
               <h1 className="font-roxborough sm:text-3xl mobile:text-3xl md:text-5xl overflow-hidden text-text_Color font-semibold ">
                 Contact Us{" "}
               </h1>
 
               <p
-                className="sm:text-center sm:w-[85%] sm:mt-3 mobile:text-center mobile:w-[85%] mobile:mt-3 md:w-[100%] md:text-start md:text-lg text-text_Color hover:underline font-Marcellus cursor-pointer"
+                className="sm:text-center sm:w-[85%] sm:mt-3 mobile:text-center mobile:w-[85%] mobile:mt-3 md:w-[100%] md:mt-8 md:text-start md:text-lg text-text_Color hover:underline font-Marcellus cursor-pointer"
                 onClick={() => {
                   window.location.href = `mailto:${admininfo.Email}`;
                 }}
               >
-                Reach us at: {admininfo.Email}
+                For queries: {admininfo.Email}
               </p>
               <a
                 href="https://maps.app.goo.gl/XdV5YEbN1uNgdnTw6"
                 target="_blank"
               >
-                <p className="hover:underline sm:text-center sm:mt-2 sm:px-3 mobile:mt-2 mobile:px-3 font-Marcellus md:text-start md:px-0">
+                <p className="hover:underline sm:text-center mobile:text-center sm:mt-2 sm:px-3 mobile:mt-2 mobile:px-3 font-Marcellus md:text-start md:px-0">
                   {admininfo.Address}
                 </p>
               </a>
               <p className="sm:mt-2 mobile:mt-2 md:w-[100%] md:text-start font-Marcellus">
-                Online Queries: {""}
-                {admininfo.MobileNo}
+                Customer Support: {""}
+                +91{admininfo.MobileNo}
               </p>
 
               <a
@@ -192,16 +191,16 @@ const ContactUs = () => {
               >
                 <button
                   type="button"
-                  className="text-white bg-[#60713A] focus:ring-4 focus:outline-none focus:ring-[#1eba57]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2 mt-6"
+                  className="text-white bg-[#1eba57] focus:ring-4 focus:outline-none focus:ring-[#1eba57]/50 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2 mt-6"
                 >
-                  <FaWhatsapp className="pr-2" size={25} />
+                  <FaWhatsapp className="pr-2" size={29} />
                   Whatsapp Us
                 </button>
               </a>
             </div>
 
-            <div className="mobile:w-[100%] text-text_Color font-Marcellus  mobile:mt-10 mobile:flex mobile:flex-col mobile:justify-center mobile:items-center mobile:mb-8 sm:w-[100%] sm:mt-10 sm:flex sm:flex-col sm:justify-center sm:items-center sm:mb-8  md:border-l-2 md:border-[#642F29] ">
-              <h1 className="mobile:uppercase mobile:text-xl  sm:uppercase font-roxborough sm:text-xl font-semibold md:w-[90%] md:text-start md:text-3xl text-text_Color">
+            <div className="mobile:w-[100%] text-text_Color font-Marcellus  mobile:mt-10 mobile:flex mobile:flex-col mobile:justify-center mobile:items-center mobile:mb-8 sm:w-[100%] sm:mt-10 sm:flex sm:flex-col sm:justify-center sm:items-center sm:mb-8  md:border-l-[1px] md:border-[#642F29] ">
+              <h1 className=" mobile:text-3xl  font-roxborough sm:text-xl font-semibold md:w-[90%] md:text-start md:text-4xl overflow-y-hidden text-text_Color">
                 Write Us a Message
               </h1>
               <div className="w-[90%] mt-6">
@@ -209,7 +208,7 @@ const ContactUs = () => {
                   <div>
                     <div className="md:flex md:w-full gap-x-3">
                       <div className="md:w-[50%]">
-                        <div className="mobile:mt-0 ">
+                        <div className="mobile:mt-4 ">
                           <input
                             className="flex h-10 w-full  text-lg  border-b-[1px] border-b-[#642F29] bg-transparent  placeholder:text-[#642F29] placeholder:font-Marcellus focus:outline-none  disabled:cursor-not-allowed md:placeholder:text-lg md:mt-2 disabled:opacity-50"
                             type="text"
@@ -226,12 +225,12 @@ const ContactUs = () => {
                           ) : null}
                         </div>
                       </div>
-                      <div className="sm:mt-3 mobile:mt-3 md:mt-0 md:w-[50%]">
+                      <div className="sm:mt-3 mobile:mt-6 md:mt-4 md:w-[50%]">
                         <div className="mobile:mt-0 ">
                           <input
                             className="flex h-10 w-full text-lg border-b-[1px] border-b-[#642F29] bg-transparent  placeholder:text-[#642F29] placeholder:font-Marcellus focus:outline-none  disabled:cursor-not-allowed md:placeholder:text-lg md:mt-2 disabled:opacity-50"
                             type="text"
-                            placeholder="Enter Last Name"
+                            placeholder="Enter Your Surname"
                             value={values.lastName}
                             id="lastName"
                             onChange={handleChange}
@@ -251,7 +250,7 @@ const ContactUs = () => {
                           <input
                             className="flex h-10 w-full text-lg border-b-[1px] border-b-[#642F29] bg-transparent   placeholder:text-[#642F29] placeholder:font-Marcellus focus:outline-none  disabled:cursor-not-allowed md:placeholder:text-lg md:mt-2 disabled:opacity-50"
                             type="text"
-                            placeholder="Email"
+                            placeholder="Email: "
                             value={values.userEmail}
                             id="userEmail"
                             onChange={handleChange}
@@ -305,7 +304,7 @@ const ContactUs = () => {
                   </div>
                   <button
                     type="submit"
-                    className="text-xl inline-flex sm:w-full mobile:w-full mobile:mt-8 md:w-[25%] h-[43px]  mt-1  items-center justify-center  rounded-3xl bg-[#60713A]  leading-7 text-white font-Marcellus leading-17 tracking-normal text-center"
+                    className="text-xl uppercase inline-flex sm:w-full mobile:w-full mobile:mt-8 md:w-[25%] h-[43px]  mt-1  items-center justify-center  rounded-3xl bg-[#60713A]  leading-7 text-white font-Marcellus font-normal leading-17 tracking-normal text-center"
                   >
                     Submit
                   </button>
