@@ -9,6 +9,7 @@ export default {
         Marcellus: ["Marcellus"],
         Abel: ["Abel, sans-serif"],
         roxboroughnormal2: ["Roxborough CF Bold"],
+        RoxboroughCFBold: ["Roxborough CF Bold"],
       },
       fontWeight: {
         mid_semi: "520",

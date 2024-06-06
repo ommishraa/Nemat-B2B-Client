@@ -7,6 +7,12 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@font-face {
+  font-family: "Roxborough CF Bold";
+  src: url("./assets/fonts/roxborough-cf-bold.ttf");
+}
+
 html {
   height: 100%;
 }
@@ -24,7 +30,7 @@ html {
 @media (max-width: 760px) {
   * {
     overflow-y: auto;
-    
+
   }
 }
 
@@ -103,7 +109,6 @@ html {
 .aboutSection .heroSection .content h1 {
   color: #642f29;
   text-align: center;
-  font-family: "roxborough_cfbold";
   font-size: calc(38px + 0.2vw);
   max-width: 700px;
   width: 100%;
@@ -525,7 +530,8 @@ html {
 
 /* Optional: Define scrollbar styles for other browsers */
 .overflow-x-auto {
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .fixed-scroll {
@@ -546,4 +552,3 @@ html {
   /* Set your desired background color for error toasts */
   margin-top: 50px;
 }
-
