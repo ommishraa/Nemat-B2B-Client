@@ -1,5 +1,5 @@
 import * as yup from "yup";
- 
+
 export const RegisterobjectSchema = yup.object({
   camponeyname: yup.string().min(2).required("Enter your Company Name"),
   gstno: yup
@@ -15,8 +15,11 @@ export const RegisterobjectSchema = yup.object({
   zipcode: yup
     .number()
     .typeError("Please enter a valid number")
-    .integer("Please enter a valid number")
+    .integer("Please enter a Zip Code")
+    .min(99999, "Please enter a valid number")
+    .max(999999, "Please enter 6 digit zip Code number")
     .required("Enter the Zip Code"),
+
   fullname: yup
     .string()
     .required("Full name is required")
@@ -37,7 +40,7 @@ export const RegisterobjectSchema = yup.object({
     .test((val) => val && val.toString().length === 10)
     .min(1, "Please Enter 10 digit number")
     .max(9999999999, "Enter 10 digit number ")
-    .required("Enter the 10 digit no"),
+    .required("Please Enter Valid Number"),
   whatappcheck: yup
     .number()
     .oneOf([0, 1])
@@ -51,7 +54,6 @@ export const RegisterobjectSchema = yup.object({
     .typeError("Please enter a valid number")
     .integer("Please enter a valid LandLine number"),
 });
-
 
 export const CompanyschemaObject = yup.object({
   camponeyname: yup.string().min(2).required("Enter your Company name"),
@@ -82,11 +84,10 @@ export const PasswordChangeObjectSchema = yup.object({
     .required("Confirm the Password"),
 });
 
-
-export  const LoginObjectSchema = yup.object({
-     email: yup
-       .string()
-       .email("Enter your Valid Email id")
-       .required("Enter Your Email"),
-     password: yup.string().min(5).required("Enter the Password"),
-   });
+export const LoginObjectSchema = yup.object({
+  email: yup
+    .string()
+    .email("Enter your Valid Email id")
+    .required("Enter Your Email"),
+  password: yup.string().min(5).required("Enter the Password"),
+});
