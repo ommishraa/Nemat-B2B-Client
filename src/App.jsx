@@ -20,6 +20,7 @@ import Policies from "./pages/Policies";
 import AboutUs from "./pages/AboutUs";
 import Search from "./component/Search";
 import SellesOrder from "./component/SellesOrder";
+import AdminContactUSByEmail from "./pages/AdminContactUSByEmail";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/forgotPasswordCheak" element={<ForgotPassword />} />
         <Route path="/resetpassword/:_token" element={<ResetPassword />} />
+        <Route path="/admincontactus" element={<AdminContactUSByEmail/>}  />
         {/* <Route  path='/resetpassword' element={<ResetPassword/>}/> */}
 
         <Route path="verifyuser/:_id" element={<VerifyUser />} />
