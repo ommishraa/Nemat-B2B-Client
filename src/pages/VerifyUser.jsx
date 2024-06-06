@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Union from "../assets/loginImages/Union.png";
 import { CiLock } from "react-icons/ci";
@@ -29,7 +29,7 @@ const VerifyUser = () => {
 
       if (response.status === 200) {
         toast.custom(
-          (t) => <CustomToast message={"You are verify"} type={"success"} />,
+          (t) => <CustomToast message={"You are Verified"} type={"success"} />,
           {
             position: "top-center",
             duration: 2000,
@@ -87,16 +87,18 @@ const VerifyUser = () => {
             </h1>
 
             <p className="text-center w-[90%] mt-5 font-Marcellus font-normal text-text_Color text-16 leading-22 tracking-tight">
-              Your email has been successfully verified. We will send you
-              default password for login after verifying your details.
+              Your email has been successfully verified. We will send you your
+              password via email after verifying all your details.
             </p>
             {/* <div className="w-full flex justify-between mt-5">
               <button className="py-2 w-[49%] font-Marcellus font-normal rounded-3xl border-[1px] border-text_Color2 uppercase text-center">
                 cancel
               </button>
-              <button className="py-2 w-[49%] rounded-3xl border-[1px] bg-text_Color2 text-white border-text_Color2 uppercase text-center">
-                login
-              </button>
+              <Link className="w-[49%]" to="/">
+                <button className="py-2 w-full  rounded-3xl border-[1px] bg-text_Color2 text-white border-text_Color2 uppercase text-center">
+                  login
+                </button>
+              </Link>
             </div> */}
           </div>
         </div>
