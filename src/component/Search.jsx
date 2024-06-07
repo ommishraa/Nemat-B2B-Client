@@ -54,8 +54,8 @@ const Search = () => {
           );
 
           console.log(response.data);
-          setSeriesData(response.data);
-          // setProductData(response.data.ProductsData);
+          setSeriesData(response.data.SeriesData);
+          setProductData(response.data.ProductsData);
         } catch (error) {
           if (error.response) {
             const { status, data } = error.response;
@@ -335,7 +335,7 @@ const Search = () => {
       )}
 
       {/* Product Page Data */}
-      {/* {productData && productData.length > 0 && (
+      {productData && productData.length > 0 && (
         <div>
           <div className="p-2 py-5  w-full mb-2">
             <img src={Flower} className="w-full object-cover" />
@@ -455,7 +455,7 @@ const Search = () => {
             </div>
           </div>
         </div>
-      )} */}
+      )}
       <div className="mt-10">
         <Footer />
       </div>

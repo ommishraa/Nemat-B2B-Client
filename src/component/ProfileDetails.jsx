@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import getToken from "./auth/GetToken";
 import CustomToast from "../hooks/CustomToast";
 import toast, { Toaster } from "react-hot-toast";
+import ProfileLandLineNoUpdate from "../component/ProfileLandLineNoUpdate";
 
 const ProfileDetails = () => {
   const { _id } = useParams();
@@ -22,6 +23,7 @@ const ProfileDetails = () => {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState([]);
   const [changePasswordModal, setChangePasswordModal] = useState(false);
+  const [openLandLineNumberPop , setOpenLandLineNumberPop] = useState(false);
 
   const navigate = useNavigate();
 
@@ -41,7 +43,6 @@ const ProfileDetails = () => {
       setProfileData(response.data);
       setAddress(response.data.ShippingAddress);
       setLoading(false);
- 
     } catch (error) {
       if (error.response) {
         const { status, data } = error.response;
@@ -168,9 +169,13 @@ const ProfileDetails = () => {
     setChangePasswordModal(true);
   };
 
+  const changeLandlineNumber = () => {
+    setOpenLandLineNumberPop(true);
+  }
+
   return (
     <div className="mt-8 md:h-auto md:border-l-[1px] border-text_Color">
-      <Toaster/>
+      <Toaster />
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -348,7 +353,11 @@ const ProfileDetails = () => {
                       <input
                         className="flex h-10 w-[100%] font-Marcellus text-base text-center text-text_Color  border-b-[1px] border-b-[#642F29] bg-transparent px-3 py-2  placeholder:text-[#642F29] focus:outline-none"
                         id="CNlandlineNumber"
-                        value={` +  ${profileData?.Country_LandlineNumber}`}
+                        value={
+                          profileData?.Country_LandlineNumber
+                            ? `+ ${profileData.Country_LandlineNumber}`
+                            : ""
+                        }
                         onChange={handleChange}
                         onBlur={handleBlur}
                       ></input>
@@ -369,15 +378,23 @@ const ProfileDetails = () => {
                       LandLine Number{" "}
                     </label>
                     <div className="">
-                      <input
-                        className="flex h-10 w-full text-text_Color text-base font-Marcellus  sm:w-[100%] mobile:w-[100%]  border-b-[1px] border-b-[#642F29] bg-transparent   placeholder:text-[#642F29] placeholder:font-Marcellus focus:outline-none  disabled:cursor-not-allowed md:placeholder:text-sm disabled:opacity-50"
-                        type="text"
-                        placeholder=" Mobile Number"
-                        id="landlineNumber"
-                        value={profileData.LandlineNumber}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      ></input>
+                      <div className="mobile:mt-0 mobile:flex sm:flex">
+                        <input
+                          className="flex h-10 w-full text-text_Color text-base font-Marcellus  sm:w-[100%] mobile:w-[100%]  border-b-[1px] border-b-[#642F29] bg-transparent   placeholder:text-[#642F29] placeholder:font-Marcellus focus:outline-none  disabled:cursor-not-allowed md:placeholder:text-sm disabled:opacity-50"
+                          type="text"
+                          // placeholder=" Mobile Number"
+                          id="landlineNumber"
+                          value={profileData.LandlineNumber || ""}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        ></input>
+                        <RiEdit2Line
+                          size={25}
+                          color="#60713A"
+                          className="z-0 sm:mt-2 mobile:mt-2 md:mt-3 -ml-6 cursor-pointer "
+                          onClick={changeLandlineNumber}
+                        />
+                      </div>
                       {errors.landlineNumber && touched.landlineNumber ? (
                         <p className="font-Marcellus text-red-900">
                           {errors.landlineNumber}
@@ -388,6 +405,13 @@ const ProfileDetails = () => {
                 </div>
               </div>
             </div>
+            {
+              openLandLineNumberPop && (
+                <div>
+                  <ProfileLandLineNoUpdate profileData={profileData} setProfileData={setProfileData} setOpenLandLineNumberPop={setOpenLandLineNumberPop} />
+                </div>
+              )
+            }
           </div>
           {/* Company Details */}
 

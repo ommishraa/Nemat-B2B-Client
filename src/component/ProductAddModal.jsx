@@ -183,19 +183,19 @@ const ProductAddModal = ({
       console.log(response.data);
       dispatch(totalCartValueInCart(response.data.TotalProductInCart));
 
-      toast.custom(
-        (t) => (
-          <CustomToast
-            message={"Remove Product SuccessFully"}
-            type={"success"}
-          />
-        ),
-        {
-          position: "top-center",
-          duration: 2000,
-          className: "",
-        }
-      );
+      // toast.custom(
+      //   (t) => (
+      //     <CustomToast
+      //       message={"Remove Product SuccessFully"}
+      //       type={"success"}
+      //     />
+      //   ),
+      //   {
+      //     position: "top-center",
+      //     duration: 2000,
+      //     className: "",
+      //   }
+      // );
       setTotalQuantity(0);
       setLoadCartData(true);
       setProductModal(false);
@@ -225,7 +225,7 @@ const ProductAddModal = ({
 
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-30 flex items-center justify-center z-50">
-      <div className="bg-white p-4 rounded-md md:w-[65%] mobile:w-[96%] h-auto ">
+      <div className="bg-white p-4 rounded-md md:w-[65%] mobile:w-[96%] md:h-auto mobile:h-[70%] ">
         <Toaster />
         {loading ? (
           <p>wait For Data </p>
@@ -238,7 +238,7 @@ const ProductAddModal = ({
                     update your order
                   </p>
                   <p className onClick={() => setProductModal(false)}>
-                    <IoClose color="#60713A" size={25} />
+                    <IoClose color="#60713A" className="cursor-pointer" size={25} />
                   </p>
                 </div>
                 <div className="mobile:w-[96%] md:w-[94%] mx-auto flex justify-end items-end mt-5"></div>
@@ -255,24 +255,26 @@ const ProductAddModal = ({
                     </div>
                   </div>
                   <div className="md:w-[100%] md:ml-[2%]">
-                    <div className="flex mobile:justify-between mobile:mt-8  sm:justify-between sm:mt-6 md:mt-0 md:w-[100%] ">
-                      <div className="mobile:w-[55%] sm:w-[55%]">
-                        <h1 className="mobile:w-full mobile:h-full mobile:flex mobile:items-center  font-roxboroughnormal2 font-bold  sm:text-2xl mobile:text-2xl text-text_Color sm:w-full sm:h-full sm:flex sm:items-center md:text-3xl">
+                    <div className="md:flex mobile:justify-between mobile:mt-6  relative sm:justify-between sm:mt-6 md:w-[100%] md:mt-2">
+                      <div className="mobile:w-[95%] sm:w-[95%] md:w-[50%] lg:w-[80%]">
+                        <h1 className="mobile:w-full mobile:h-full mobile:flex mobile:items-center mobile:justify-center md:justify-start font-roxboroughnormal text-lg font-semibold md:text-xl lg:text-3xl text-text_Color sm:w-full sm:h-full sm:flex sm:items-center relative">
                           {productData.Name}{" "}
                         </h1>
                       </div>
+                      <div className="mobile:w-[95%] mobile:mr-3 sm:w-full flex mobile:justify-center md:justify-end mobile:my-3 md:my-0 md:w-auto">
                       <button
-                        className="mobile:flex mobile:justify-end mobile:items-center mobile:px-4 mobile:p-2 sm:p-2 sm:flex sm:justify-end sm:items-center sm:mr-3 sm:px-4 border-2 border-text_Color2 uppercase rounded-3xl  font-Marcellus text-text_Color2
+                        className="mobile:flex h-12 w-32 uppercase mobile:justify-center mobile:items-center mobile:mr-3 mobile:px-4 mobile:p-2 sm:p-2 sm:flex sm:justify-end sm:items-center sm:mr-3 sm:px-4  border-2 border-text_Color2 rounded-3xl  font-Marcellus text-text_Color2
                      "
                         onClick={() => resetCartHandler()}
                       >
                         Reset QTY
                       </button>
+                       </div>
                     </div>
                     <div>
                       <div className="mobile:w-[100%] sm:w-[100%]">
                         <div>
-                          <h1 className="font-roxboroughnormal2 font-semibold text-lg text-text_Color">
+                          <h1 className="font-roxborough font-semibold text-text_Color mobile:text-center sm:text-center md:text-start text-lg">
                             Select Pack Size:
                           </h1>
                         </div>
