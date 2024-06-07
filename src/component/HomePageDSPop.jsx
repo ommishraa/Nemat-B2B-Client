@@ -12,8 +12,8 @@ const HomePageDSPop = ({
   };
 
   return (
-    <div className="flex md:w-[65%] mobile:w-[96%]  flex-col justify-center items-center  mt-8 bg-Cream ">
-      <div className="mt-10 flex font-semibold uppercase text-2xl text-text_Color">
+    <div className="flex md:w-[65%] mobile:w-[90%] mobile:h-[80%] md:h-auto  flex-col justify-center items-center  mt-8 bg-Cream ">
+      <div className="mt-10 flex font-semibold mobile:h-auto uppercase text-2xl text-text_Color">
         <ProductHeader title={"DISCOUNT SLABS"} className="pt-4 " />
       </div>
       {isModalOpen && (
@@ -24,7 +24,7 @@ const HomePageDSPop = ({
         </button>
       )}
 
-      <div className="mt-9 mb-9 md:w-[80%]  sm:w-[70%] mobile:w-[96%]">
+      <div className="mt-9 mb-9 md:w-[90%]  sm:w-[70%] mobile:w-[96%]">
         <div className="flex flex-col w-[100%]   border-[1px] border-text_Color font-Marcellus text-text_Color overflow-hidden">
           <div className="flex border-b-[1px] border-text_Color w-full h-[68px] justify-around items-center text-center mobile:text-sm mobile:font-bold sm:font-bold  sm:text-base md:text-xl">
             <h1 className="text-center w-[34%] overflow-hidden">
@@ -79,9 +79,16 @@ const HomePageDSPop = ({
             ) : (
               <p>No data available</p>
             )}
+            
           </div>
         </div>
+        <div className="w-full mx-auto mt-5 flex justify-center">
+              <button onClick = {() => setIsModalOpen(false)} className=" mx-auto bg-text_Color2 text-white py-2.5 px-4 rounded-3xl uppercase font-Marcellus font-normal text-lg hover:bg-hoverBGGreen">
+                continue shopping
+              </button>
+            </div>
       </div>
+      
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import DottedLineGold from "../assets/HomePage/DottedLineGold1.png";
+import DottedLineGold from "../assets/HomePage/yellowline.png";
 import { useMediaQuery } from "react-responsive";
 import "../App.css";
 import Discountslabe from "./products/Discountslabe";
@@ -13,7 +13,7 @@ import "slick-carousel/slick/slick-theme.css";
 import NavBars from "./common/NavBars";
 import { useNavigate } from "react-router-dom";
 import Flower from "../assets/HomePage/Flower.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCategoryDataStore } from "../slices/categorySlice";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
@@ -21,6 +21,8 @@ import getToken from "./auth/GetToken";
 import HomePageDSPop from "./HomePageDSPop";
 
 const Home = () => {
+  const { user } = useSelector((store) => store.profile);
+
   const isMobile = useMediaQuery({ query: "(max-width: 760px)" });
   const [firstApiCall, setFirstApiCall] = useState(true);
   const [categoryData, setCategoryData] = useState([]);
@@ -30,7 +32,14 @@ const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [Dssprays, setDsSprays] = useState();
   const [agarbattisDs, setAgarbattisDs] = useState();
+
+  // Flag for Display DS Slabes
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Flag for not display DS for Special User
+  const [hideDs, setHideDs] = useState(
+    user?.SuperiorCustomerFlag === 1 ? true : false
+  );
 
   const sliderRef = useRef(null);
   const navigate = useNavigate();
@@ -110,8 +119,6 @@ const Home = () => {
       }
     }
   };
-
-  // console.log("show data =====>", showdata)
 
   const settings = {
     dots: false,
@@ -206,20 +213,27 @@ const Home = () => {
           {categoryData.map((category, index) => (
             <div key={index}>
               <div
-                key={index}
-                className={`p-2 py-5 w-full mb-2 ${index % 2 === 0 ? "" : ""}`}
+                className="w-full overflow-hidden"
+                style={{ height: "auto" }}
               >
                 <img
                   src={index % 2 === 0 ? DottedLineGold : Flower}
-                  className="w-full"
+                  className=" w-[100%]  md:h-auto mobile:h-[35px] mobile:object-cover" // Use 'w-auto' and 'h-auto' to maintain original size
+                  alt="Decoration"
                 />
               </div>
               <div className="mt-10 " key={category._id}>
-                <div className="font-roxborough font-mid_semi mobile:text-2xl md:text-3xl text-text_Color">
+                <div className="font-RoxboroughCFBold  font-medium mobile:text-2xl md:text-3xl text-text_Color">
                   <ProductHeader title={category.Name} />
                 </div>
                 <div className="w-full flex justify-center items-center ">
-                  <div className={` ${category.Name == "Agarbattis" ? "" : "w-[90%] sm:grid-cols-3 sm:grid mobile:grid mobile:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 mx-auto"}`}>
+                  <div
+                    className={` ${
+                      category.Name == "Agarbattis"
+                        ? "md:mt-4"
+                        : "w-[90%] sm:grid-cols-3 sm:grid mobile:grid mobile:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 mx-auto grid  place-items-center-center "
+                    }`}
+                  >
                     {category.SubCategories &&
                       category.SubCategories.map((subcategories) => (
                         <div
@@ -237,7 +251,7 @@ const Home = () => {
                               />
                             </div>
                             <h1
-                              className="font-roxboroughnormal font-semibold uppercase mobile:text-lg md:text-xl text-center w-full text-text_Color mb-4 overflow-hidden overflow-ellipsis"
+                              className="font-RoxboroughCFBold font-medium uppercase mobile:text-lg md:text-xl text-center w-[96%] mx-auto text-text_Color mb-4 overflow-hidden overflow-ellipsis"
                               style={{ minHeight: "3em" }}
                             >
                               {subcategories.Name}
@@ -256,7 +270,7 @@ const Home = () => {
         </div>
       )}
 
-      {!loading && (
+      {!loading && !hideDs && (
         <Discountslabe
           Dssprays={Dssprays}
           agarbattisDs={agarbattisDs}
@@ -265,7 +279,7 @@ const Home = () => {
         />
       )}
 
-      {isModalOpen && !loading && (
+      {isModalOpen && !loading && !hideDs && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-30 my-auto flex items-center justify-center z-50">
           <HomePageDSPop
             Dssprays={Dssprays}
@@ -276,7 +290,7 @@ const Home = () => {
         </div>
       )}
 
-      {!loading && <Footer check={true} />}
+      {!loading && <Footer check={hideDs ? false : true} />}
     </div>
   );
 };
