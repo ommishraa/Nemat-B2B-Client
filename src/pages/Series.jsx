@@ -18,6 +18,8 @@ import { useDispatch } from "react-redux";
 import { IoClose } from "react-icons/io5";
 import DisplayProgressBarScroll from "../component/DisplayProgressBarScroll";
 import CustomToast from "../hooks/CustomToast";
+import { IoIosInformationCircle } from "react-icons/io";
+import UseScrollToTop from "../component/common/UseScrollToTop";
 
 const Series = () => {
   const { _id } = useParams();
@@ -40,15 +42,14 @@ const Series = () => {
   const [descModal, setDescModal] = useState("");
   const [ConditionDisplay, setConditionDisplay] = useState(false);
 
-
   // Display KG in Place of PCS
   const [displayKG, setDisplayKG] = useState(false);
   const bottomElementRef = useRef(null);
 
   const dispatch = useDispatch();
 
-  const CategoryId = "00cca44c-1316-494a-8160-dc6c986cb79c"
-
+  const CategoryId = "00cca44c-1316-494a-8160-dc6c986cb79c";
+  // const CategoryId = "9ae3f92d-25f1-4d68-8501-cb0c719bd6b7";
   let { user } = useSelector((store) => store.profile);
 
   if (!user) {
@@ -60,6 +61,8 @@ const Series = () => {
   // useEffect(() => {
   //   getSeriesDataById();
   // }, [page]);
+
+  UseScrollToTop();
 
   useEffect(() => {
     setPage(0);
@@ -109,18 +112,15 @@ const Series = () => {
 
     try {
       const header = getToken();
-      setDisplayKG(false)
+      setDisplayKG(false);
 
       let response = await axios.post(
-        `${
-          import.meta.env.VITE_REACT_APP_BASE_URL
-        }/subcategorypage/getdata`,
+        `${import.meta.env.VITE_REACT_APP_BASE_URL}/subcategorypage/getdata`,
         payload,
         header
       );
 
-
-      console.log("Series Data ==>" , response.data);
+      console.log("Series Data ==>", response.data);
 
       setSeriesData(response.data);
       setQuantityData(response?.data?.QuantitySchemeData);
@@ -128,8 +128,8 @@ const Series = () => {
 
       // alltotalValue(seriesPrdouctData);
 
-      if(response?.data?.SubCategoriesData?.Category == CategoryId){
-        setDisplayKG(true)
+      if (response?.data?.SubCategoriesData?.Category == CategoryId) {
+        setDisplayKG(true);
       }
 
       setTotalValue(response.data.SeriestotalQuantity);
@@ -158,13 +158,13 @@ const Series = () => {
   // Slider Functions
   const sliderRefs = useSliderRefs(Products?.length);
 
-  const handleNext = (index) => {
-    sliderRefs[index].slickNext();
-  };
+  // const handleNext = (index) => {
+  //   sliderRefs[index].slickNext();
+  // };
 
-  const handlePrev = (index) => {
-    sliderRefs[index].slickPrev();
-  };
+  // const handlePrev = (index) => {
+  //   sliderRefs[index].slickPrev();
+  // };
 
   const settings = {
     dots: true,
@@ -369,7 +369,7 @@ const Series = () => {
         toast.custom(
           (t) => (
             <CustomToast
-              message={"Product Remove SuccessFully"}
+              message={"Product Removed SuccessFully"}
               type={"success"}
             />
           ),
@@ -401,14 +401,11 @@ const Series = () => {
         status === 400
       ) {
         console.log(data);
-        toast.custom(
-        (t) => <CustomToast message={data} type={"error"} />,
-        {
+        toast.custom((t) => <CustomToast message={data} type={"error"} />, {
           position: "top-center",
           duration: 2000,
           className: "",
-        }
-      );
+        });
       }
     }
   };
@@ -440,8 +437,21 @@ const Series = () => {
     };
   }, []);
 
-
   // console.log("DisplayKG" , displayKG)
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const handleNext = (index) => {
+    sliderRefs[index].slickNext();
+  };
+
+  const handlePrev = (index) => {
+    sliderRefs[index].slickPrev();
+  };
+
+  const afterChange = (index) => {
+    setCurrentImageIndex(index);
+  };
 
   return (
     <div>
@@ -457,7 +467,7 @@ const Series = () => {
           <div className="md:w-[70%] md:mx-auto">
             <div>
               <div className="w-[80%] mx-auto">
-                <div className="text-text_Color font-bold text-3xl uppercase">
+                <div className="text-text_Color font-bold md:text-3xl mobile:text-xl uppercase">
                   <ProductHeader
                     title={title}
                     className="flex justify-center  items-center"
@@ -525,9 +535,15 @@ const Series = () => {
                 >
                   <div className="flex">
                     {data.max !== undefined ? (
-                      <p className="w-[50%] text-center text-text_Color font-normal border-r-0.5 border-borderColorBeige  p-1.5">{`${data.min} ${displayKG ? "Kg" : "pcs"} to ${data.max} ${displayKG ? "Kg" : "pcs"}`}</p>
+                      <p className="w-[50%] text-center text-text_Color font-normal border-r-0.5 border-borderColorBeige  p-1.5">{`${
+                        data.min
+                      } ${displayKG ? "Kg" : "pcs"} to ${data.max} ${
+                        displayKG ? "Kg" : "pcs"
+                      }`}</p>
                     ) : (
-                      <p className="w-[50%] text-center text-text_Color font-normal border-r-0.5 border-borderColorBeige p-1.5 border-b">{`${data.min} ${displayKG ? "Kg" : "pcs"} & Above`}</p>
+                      <p className="w-[50%] text-center text-text_Color font-normal border-r-0.5 border-borderColorBeige p-1.5 border-b">{`${
+                        data.min
+                      } ${displayKG ? "Kg" : "pcs"} & Above`}</p>
                     )}
                     {qunantityData.SchemeValues.length === index + 1 ? (
                       <p className="w-[50%] text-center text-text_Color font-normal p-1.5 border-b-0.5 border-borderColorBeige">
@@ -564,6 +580,7 @@ const Series = () => {
                   <Slider
                     ref={(slider) => (sliderRefs[index] = slider)}
                     {...settings}
+                    afterChange={afterChange}
                     className="mobile:overflow-hidden sm:overflow-hidden md:overflow-hidden"
                   >
                     {product.ProductOtherImage.map((images, imageIndex) => (
@@ -579,7 +596,6 @@ const Series = () => {
                           className="md:relative mobile:h-[90%] mobile:w-[70%] mobile:mx-auto mobile:object-cover sm:h-[90%] sm:w-[70%] sm:mx-auto sm:object-cover md:w-[320px] md:h-[245px] md:mx-auto transition-transform duration-300 lg:w-[350px] lg:h-[280px]"
                           alt={`Slide ${imageIndex + 1}`}
                         />
-                        {/* Three dots */}
                         <div
                           className="absolute inset-0 flex items-end h-[98%] mobile:h-[92%] justify-center z-10"
                           style={{ zIndex: 1 }}
@@ -595,24 +611,26 @@ const Series = () => {
                             ></span>
                           ))}
                         </div>
-                        {/* External Buttons */}
-                        <div className="md:absolute top-0 left-0 right-0 flex mobile:justify-between mt-2 md:mt-0 md:w-[80%] lg:w-[100%] md:mx-auto md:justify-between h-[100%] z-30">
-                          <button
-                            onClick={() => handlePrev(index)}
-                            className="sm:hidden mobile:hidden md:block z-40"
-                          >
-                            <LuChevronLeft color="#60713A" size={25} />
-                          </button>
-                          <button
-                            onClick={() => handleNext(index)}
-                            className="sm:hidden mobile:hidden md:block z-40"
-                          >
-                            <LuChevronRight color="#60713A" size={25} />
-                          </button>
-                        </div>
                       </div>
                     ))}
                   </Slider>
+                  {/* Three dots */}
+
+                  {/* External Buttons */}
+                  <div className="md:absolute top-0 left-0 right-0 flex mobile:justify-between mt-2 md:mt-0 md:w-[80%] lg:w-[100%] md:mx-auto md:justify-between h-[100%] z-30">
+                    <button
+                      onClick={() => handlePrev(index)}
+                      className="sm:hidden mobile:hidden md:block z-40"
+                    >
+                      <LuChevronLeft color="#60713A" size={25} />
+                    </button>
+                    <button
+                      onClick={() => handleNext(index)}
+                      className="sm:hidden mobile:hidden md:block z-40"
+                    >
+                      <LuChevronRight color="#60713A" size={25} />
+                    </button>
+                  </div>
 
                   {/* External Buttons */}
                   <div className="mobile:flex md:hidden mobile:absolute mobile:mt-[-50%] mobile:w-[90%] mobile:mx-auto sm:flex  sm:absolute sm:mt-[-50%] sm:w-[90%] sm:mx-auto  md:w-[25.5%] lg:w-[25.7%] md:mt-[140px] md:mr-2 md:object-cover">
@@ -649,13 +667,13 @@ const Series = () => {
                     )}
                   </div> */}
 
-                  <div className="flex mobile:justify-between mobile:mt-6  relative sm:justify-between sm:mt-6 md:w-[100%] md:mt-2 ">
-                    <div className="mobile:w-[55%] sm:w-[55%] ">
-                      <h1 className="mobile:w-full mobile:h-full mobile:flex mobile:items-center font-roxboroughnormal text-lg font-semibold md:text-xl lg:text-3xl text-text_Color sm:w-full sm:h-full sm:flex sm:items-center relative">
-                        {product.Name}{" "}
+                  <div className="md:flex mobile:justify-between mobile:mt-6  relative sm:justify-between sm:mt-6 md:w-[100%] md:mt-2 ">
+                    <div className="mobile:w-[95%] sm:w-[95%] md:w-[50%] lg:w-[80%] ">
+                      <h1 className="mobile:w-full mobile:h-full mobile:flex mobile:items-center mobile:justify-center md:justify-start font-roxboroughnormal text-lg font-semibold md:text-xl lg:text-3xl text-text_Color sm:w-full sm:h-full sm:flex sm:items-center relative">
+                        {product.Name}
                         <span
                           onClick={() => popModalHandler(index)}
-                          className="w-[24px] h-[24px] text-center cursor-pointer bg-text_Color text-white text-base rounded-full mobile:ml-2 md:ml-3"
+                          className="w-[24px] h-[24px] text-center cursor-pointer bg-text_Color text-white text-base rounded-full mobile:ml-2 md:mr-3"
                         >
                           i
                         </span>
@@ -676,26 +694,28 @@ const Series = () => {
                               color="60713A"
                             />
                           </div>
-                          <p className="w-[98%] mx-auto mt-2.5 text-text_Color font-Marcellus font-normal text-base">
+                          <p className="whitespace-pre-line w-[98%] mx-auto mt-2.5 text-text_Color font-Marcellus font-normal text-base">
                             {product.Description}
                           </p>
                         </div>
                       </div>
                     )}
 
-                    <button
-                      className="mobile:flex h-12 w-32 uppercase mobile:justify-end mobile:items-center mobile:mr-3 mobile:px-4 mobile:p-2 sm:p-2 sm:flex sm:justify-end sm:items-center sm:mr-3 sm:px-4  border-2 border-text_Color2 rounded-3xl  font-Marcellus text-text_Color2
-                     "
-                      onClick={() => removeproductCart(product._id, index)}
-                    >
-                      Reset QTY
-                    </button>
+                    <div className="mobile:w-[95%] mobile:mr-3 sm:w-full flex mobile:justify-center md:justify-end mobile:my-3 md:my-0 md:w-auto">
+                      <button
+                        className="mobile:flex h-12 w-32 uppercase mobile:justify-center mobile:items-center mobile:mr-3 mobile:px-4 mobile:p-2 sm:p-2 sm:flex sm:justify-end sm:items-center sm:mr-3 sm:px-4  border-2 border-text_Color2 rounded-3xl  font-Marcellus text-text_Color2
+                      "
+                        onClick={() => removeproductCart(product._id, index)}
+                      >
+                        Reset QTY
+                      </button>
+                    </div>
                   </div>
 
                   <div className="md:mt-3">
                     <div className="mobile:w-[100%] sm:w-[100%]">
-                      <div>
-                        <h1 className="font-roxborough font-semibold text-text_Color">
+                      <div className="mobile:w-[95%] sm:w-[95%] ">
+                        <h1 className="font-roxborough font-semibold text-text_Color mobile:text-center sm:text-center md:text-start text-lg">
                           Select Pack Size:
                         </h1>
                       </div>
@@ -719,7 +739,8 @@ const Series = () => {
                                 }
                               >
                                 {/* Render packsize information */}
-                                {packsize.size} {displayKG ? "Kg" : "pcs"} ({packsize.nameConvention})
+                                {packsize.size} {displayKG ? "Kg" : "pcs"} (
+                                {packsize.nameConvention})
                               </button>
                             )
                         )}
@@ -747,11 +768,18 @@ const Series = () => {
                           className="mobile:w-full sm:w-full mobile:p-3 sm:p-3  rounded-3xl font-Marcellus font-normal bg-text_Color2 text-white"
                           onClick={() => addToCart(index)}
                         >
-                          ADD TO CART - {calculateTotalUnits(index)} {displayKG ? "Kg" : "pcs"}
+                          ADD TO CART - {calculateTotalUnits(index)}{" "}
+                          {displayKG ? "Kg" : "pcs"}
                         </button>
                       </div>
                     </div>
-                    <button className="mobile:w-full text-text_Color font-normal sm:w-full p-1  rounded-3xl mt-3 bg-[#FFFBF0] font-Marcellus ">
+                    <button
+                      className={`mobile:w-full text-text_Color font-normal sm:w-full p-1 rounded-3xl mt-3 font-Marcellus ${
+                        product.TotalQuantityInCart > 0
+                          ? "bg-[#FFFBF0] border-[1px] border-text_Color2"
+                          : "bg-[#FFFBF0]"
+                      }`}
+                    >
                       Total Units In Cart:{" "}
                       {initialTotal
                         ? product?.TotalQuantityInCart
