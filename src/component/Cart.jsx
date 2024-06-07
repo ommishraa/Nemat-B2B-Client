@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { formattedAmount } from "../component/common/FormatAmount";
 import Footer from "../component/footer/footer";
 import ContinueCheckout from "./products/ContinueCheckout";
-import { toast } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 import DeliveredAddAddress from "./DeliveredAddAddress";
 import ProductAddModal from "./ProductAddModal";
 import getToken from "./auth/GetToken";
@@ -33,6 +33,7 @@ const Cart = () => {
 
   const { user } = useSelector((store) => store.profile);
   const navigate = useNavigate();
+  const [hideDs, setHideDs] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -76,11 +77,18 @@ const Cart = () => {
 
       dispatch(totalCartValueInCart(response.data.TotalProductInCart));
 
+      console.log(response.data);
+
       setOrderSummaryDetails(response.data.RightSideData[0]);
       setGrandTotalData(response.data.RightSideData[1]);
       setCategoryTotal(response.data.RightSideData[2]);
+      setHideDs(
+        response.data.RightSideData[0][0].SuperiorCustomer === 1 ? true : false
+      );
       setAddress(response.data.ShippingAddress);
       setLoading(false);
+
+      // console.log("flagCheck" , response.data.RightSideData[0][0].SuperiorCustomer  )
 
       // console.log(response.data.ShippingAddress);
     } catch (error) {
@@ -154,9 +162,30 @@ const Cart = () => {
     setProductModal(true);
   };
 
+
+  const highlightAfterGet = (string) => {
+  const words = string.split(" ");
+  const result = [];
+  let highlight = false;
+
+  for (let i = 0; i < words.length; i++) {
+    if (words[i].toUpperCase() === "GET") {
+      highlight = true;
+      result.push({ word: words[i], highlight: false });
+    } else if (highlight) {
+      result.push({ word: words[i], highlight: true });
+    } else {
+      result.push({ word: words[i], highlight: false });
+    }
+  }
+
+  return result;
+};
+
   let nextDiscountPercent = null;
   return (
     <div>
+      <Toaster />
       <div>
         <NavBars />
       </div>
@@ -217,7 +246,7 @@ const Cart = () => {
 
                         <div className="mobile:w-full mobile:flex  mobile:justify-between mobile:mt-3 mobile:mb-2 font-Marcellus text-text_Color text-sm mobile:pb-3 border-b-[1px] border-text_Color sm:w-full sm:flex sm:justify-between sm:mt-3 sm:mb-2 sm:pb-3 ">
                           <h1 className="font-Marcellus mobile:text-base md:text-lg font-normal text-text_Color">
-                            Total product quantity:{product.totalQuantity}
+                            Total product quantity: {product.totalQuantity}
                           </h1>
                           <h1 className="font-Marcellus mobile:text-base md:text-lg font-normal text-text_Color">
                             Total Amount:{" "}
@@ -235,7 +264,7 @@ const Cart = () => {
                                     handlerPopProduct(cartProduct.product_id)
                                   }
                                 >
-                                  <div className="mobile:w-[38%] sm:w-[38%] mr-4 md:w-[90px] md:h-[110px] ">
+                                  <div className="mobile:w-[38%] sm:w-[38%] mr-4 md:w-[90px] md:h-[110px] mobile:object-cover ">
                                     <img
                                       src={`${
                                         import.meta.env.VITE_REACT_APP_BASE_URL
@@ -336,27 +365,19 @@ const Cart = () => {
                               }
                               className="p-3 uppercase text-text_Color font-Marcellus font-normal"
                             >
-                              {product.UpsellString.split(" ").map(
-                                (word, index) => {
-                                  if (
-                                    index === 11 ||
-                                    index === 12 ||
-                                    index === 13
-                                  ) {
-                                    return (
-                                      <span
-                                        key={index}
-                                        style={{
-                                          color: "#C28E5E",
-                                        }}
-                                      >
-                                        {word}{" "}
-                                      </span>
-                                    );
-                                  } else {
-                                    return word + " ";
-                                  }
-                                }
+                              {highlightAfterGet(product.UpsellString).map(
+                                (item, index) => (
+                                  <span
+                                    key={index}
+                                    style={{
+                                      color: item.highlight
+                                        ? "#C28E5E"
+                                        : "inherit",
+                                    }}
+                                  >
+                                    {item.word}{" "}
+                                  </span>
+                                )
                               )}
                             </p>
                           </div>
@@ -367,7 +388,7 @@ const Cart = () => {
                     {/* Add Address  */}
                     <div>
                       {address.length == 0 ? (
-                        <CartAddress 
+                        <CartAddress
                           address={address}
                           setAddress={setAddress}
                         />
@@ -383,7 +404,7 @@ const Cart = () => {
                   </div>
 
                   <div className="mobile:w-[96%] sm:w-[96%] md:h-fit mobile:mx-auto mobile:h-auto sm:mx-auto sm:h-auto bg-CartRightColor mt-10 md:w-[34%] md:mt-0">
-                    <h1 className="mobile:text-center sm:text-center mt-6 font-roxborough text-text_Color font-bold text-xl">
+                    <h1 className="mobile:text-center sm:text-center mt-6 font-roxborough text-text_Color font-semibold text-xl">
                       Order Summary
                     </h1>
                     {/* Left Side Part  */}
@@ -434,97 +455,125 @@ const Cart = () => {
                         </div>
 
                         {/* Right Side Part  */}
+
                         {discountSlabe.map((discountItem) => (
                           <div
                             key={discountItem._id}
-                            className="bg-Cream border-t-[1px] border-dashed border-text_Color"
+                            className={`${
+                              !hideDs
+                                ? "bg-Cream border-t-[1px] border-dashed border-text_Color"
+                                : ""
+                            }`}
                           >
                             {data.CartDiscountSchemeId === discountItem._id && (
                               <div className="flex flex-col w-[100%] justify-between mx-auto">
-                                <div className="flex w-[90%] justify-between mx-auto">
-                                  {discountItem.DiscountSlabs.map(
-                                    (DSPercentage, index) => {
-                                      if (
-                                        data.DiscountPercent ===
-                                        DSPercentage.discountPercent
-                                      ) {
-                                        // Find the next value without checking the condition
-                                        const nextMatch =
-                                          discountItem.DiscountSlabs.slice(
-                                            index + 1
-                                          ).find((nextDSPercentage) => true);
+                                {/* IF TRUE HIDE DS OR ELSE DISPLAY ALL DS  */}
+                                {!hideDs && (
+                                  <div className="flex w-[90%] justify-between mx-auto">
+                                    {discountItem.DiscountSlabs.map(
+                                      (DSPercentage, index) => {
+                                        if (
+                                          data.DiscountPercent ===
+                                          DSPercentage.discountPercent
+                                        ) {
+                                          // Find the next value without checking the condition
+                                          const nextMatch =
+                                            discountItem.DiscountSlabs.slice(
+                                              index + 1
+                                            ).find((nextDSPercentage) => true);
 
-                                        // Store the next value in the variable
-                                        if (nextMatch) {
-                                          nextDiscountPercent =
-                                            nextMatch.discountPercent;
+                                          // Store the next value in the variable
+                                          if (nextMatch) {
+                                            nextDiscountPercent =
+                                              nextMatch.discountPercent;
+                                          }
+
+                                          return (
+                                            <div key={index}>
+                                              <div className="px-4 bg-light_Green">
+                                                <h1
+                                                  className={
+                                                    nextDiscountPercent
+                                                      ? "bg-light_Green p-2 text-white font-roxborough font-semibold"
+                                                      : "p-2 "
+                                                  }
+                                                >
+                                                  {DSPercentage.discountPercent}
+                                                  %
+                                                </h1>
+                                              </div>
+                                            </div>
+                                          );
                                         }
-
                                         return (
                                           <div key={index}>
-                                            <div className="px-4 bg-light_Green">
-                                              <h1
-                                                className={
-                                                  nextDiscountPercent
-                                                    ? "bg-light_Green p-2 text-white font-roxborough font-semibold"
-                                                    : "p-2 "
-                                                }
-                                              >
+                                            <div className="px-4">
+                                              <h1 className="p-2 font-roxborough font-semibold">
                                                 {DSPercentage.discountPercent}%
                                               </h1>
                                             </div>
                                           </div>
                                         );
                                       }
-                                      return (
-                                        <div key={index}>
-                                          <div className="px-4">
-                                            <h1 className="p-2 font-roxborough font-semibold">
-                                              {DSPercentage.discountPercent}%
+                                    )}
+                                  </div>
+                                )}
+
+                                {/* DISPLAY TEXT BASED ON CONDITION AND CACULATION */}
+                                {!hideDs ? (
+                                  <div className="bg-light_Green p-2 text-center">
+                                    {discountItem.DiscountSlabs.map(
+                                      (total, index) => (
+                                        <div
+                                          key={index}
+                                          className="w-[80%] mx-auto text-white"
+                                        >
+                                          {data.totalSeriesPrice >=
+                                            total.from &&
+                                          data.totalSeriesPrice <= total.to ? (
+                                            <h1 className="font-RoxboroughCFBold font-semibold ">
+                                              Spend{" "}
+                                              <span style={{ margin: "0 5px" }}>
+                                                {formattedAmount(
+                                                  total.to -
+                                                    data.totalSeriesPrice +
+                                                    1
+                                                )}
+                                              </span>{" "}
+                                              more to get
+                                              <span style={{ margin: "0 5px" }}>
+                                                {nextDiscountPercent}%
+                                              </span>
+                                              discount on your order
                                             </h1>
-                                          </div>
+                                          ) : null}
                                         </div>
-                                      );
-                                    }
-                                  )}
-                                </div>
-                                <div className="bg-light_Green p-2 text-center">
-                                  {discountItem.DiscountSlabs.map(
-                                    (total, index) => (
-                                      <div
-                                        key={index}
-                                        className="w-[80%] mx-auto text-white"
-                                      >
-                                        {data.totalSeriesPrice >= total.from &&
-                                        data.totalSeriesPrice <= total.to ? (
-                                          <h1 className="font-roxborough font-medium ">
-                                            Spend{" "}
-                                            <span style={{ margin: "0 5px" }}>
-                                              {formattedAmount(
-                                                total.to - data.totalSeriesPrice
-                                              )}
-                                            </span>{" "}
-                                            more to get
-                                            <span style={{ margin: "0 5px" }}>
-                                              {nextDiscountPercent}%
-                                            </span>
-                                            discount on your order
-                                          </h1>
-                                        ) : null}
+                                      )
+                                    )}
+                                    {discountItem.DiscountSlabs.every(
+                                      (total) =>
+                                        data.totalSeriesPrice >= total.from
+                                    ) && (
+                                      <div className="w-[80%] mx-auto text-white font-RoxboroughCFBold font-semibold">
+                                        <h1>
+                                          Congratulations You Reach Your max
+                                          Limit
+                                        </h1>
                                       </div>
-                                    )
-                                  )}
-                                  {discountItem.DiscountSlabs.every(
-                                    (total) =>
-                                      data.totalSeriesPrice >= total.from
-                                  ) && (
-                                    <div className="w-[80%] mx-auto text-white font-Marcellus font-semibold">
-                                      <h1>
-                                        Congratulations You Reach Your max Limit
+                                    )}
+                                  </div>
+                                ) : (
+                                  <div className="bg-light_Green p-2 text-center">
+                                    <div
+                                      key={index}
+                                      className="w-[80%] mx-auto text-white"
+                                    >
+                                      <h1 className=" font-RoxboroughCFBold font-semibold  ">
+                                        Trade Discount Applied
                                       </h1>
                                     </div>
-                                  )}
-                                </div>
+                                  </div>
+                                )}
                               </div>
                             )}
                           </div>
@@ -537,7 +586,7 @@ const Cart = () => {
                       {grandTotaldata.map((total, index) => (
                         <div key={index} className="">
                           <div className="flex w-[90%] justify-between mx-auto mb-3">
-                            <p className="font-roxborough font-semibold">
+                            <p className="font-roxborough font-semibold pr-4">
                               {total.name} Sub Total
                             </p>
                             <p className="font-Marcellus font-normal">
