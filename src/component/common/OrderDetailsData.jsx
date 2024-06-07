@@ -29,6 +29,7 @@ const OrderDetailsData = ({ data, _id }) => {
   const [cancelOrderModal, setCancelOrderModal] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [orderIdForCacelAndReorder, setOrderIdForCacelAndReorder] = useState();
+  const [lastIndex, setLastIndex] = useState(false);
 
   useEffect(() => {
     setOpenOrderData(data);
@@ -219,6 +220,8 @@ const OrderDetailsData = ({ data, _id }) => {
     setCancelOrderModal(!cancelOrderModal);
   };
 
+  console.log({ openOrderData });
+
   return (
     <div className="sm:mt-4 mobile:mt-4 md:h-auto md:ml-[7%]   ">
       <Toaster />
@@ -367,8 +370,8 @@ const OrderDetailsData = ({ data, _id }) => {
 
                 {/* For Desktop */}
                 {openIndex === index ? (
-                  <div className="mobile:w-[97%] sm:w-[97%] md:w-[49%] md:mx-2 xl:w-[40%] xl:pb-1  xl:ml-[59%] xl:mt-0 mobile:mx-auto sm:mx-auto md:flex md:flex-col md:justify-end md:pb-2  bg-Cream rounded-xl pb-3 mt-1">
-                    {opneorder.Documents.map((document) => (
+                  <div className="mobile:w-[97%] sm:w-[97%] md:w-[49%] md:mx-2 xl:w-[20%] xl:pb-1  xl:ml-[59%] xl:mt-0 mobile:mx-auto sm:mx-auto md:flex md:flex-col md:justify-end md:pb-2  bg-Cream rounded-xl pb-3 mt-1">
+                    {opneorder.Documents.map((document, index) => (
                       <div key={document._id} className="my-auto">
                         <div
                           onClick={() =>
@@ -379,12 +382,16 @@ const OrderDetailsData = ({ data, _id }) => {
                             )
                           }
                           disabled={clicked}
-                          className="w-full mt-3 flex sm:justify-center sm:items-center  mobile:justify-center mobile:items-center cursor-pointer"
+                          className={`w-full ${
+                            opneorder.Documents.length == index + 1
+                              ? ""
+                              : "border-b-[1px] border-opacity-40 border-text_Color"
+                          } mx-auto py-2  mt-1 flex sm:justify-center sm:items-center  mobile:justify-center mobile:items-center cursor-pointer`}
                         >
-                          <p className="w-[35%] flex justify-end mr-5">
+                          <p className="w-[25%] flex justify-end mr-1 ">
                             <MdOutlineFileDownload size={25} />
                           </p>
-                          <button className=" w-[65%] text-start gap-y-2 text-xl font-Marcellus">
+                          <button className=" w-[75%] text-start gap-y-2 text-xl font-Marcellus">
                             {" "}
                             {document.DocumentName}
                           </button>
@@ -575,25 +582,33 @@ const OrderDetailsData = ({ data, _id }) => {
                 )}
 
                 <div className="w-full flex items-center mt-4 h-16 md:h-12 overflow-x-auto scrollbar scrollbar-w-2 ">
-                  {statusData.map((status, index) => (
-                    <div
-                      key={index}
-                      className="mobile:w-[50%] h-full flex items-center sm:w-[30%] md:w-[20%] md:text-xs lg:text-sm xl:text-base  bg-Cream  mobile:flex-shrink-0 sm:flex-shrink-0 "
+                  {opneorder.status == 5 ? (
+                    <div 
+                      className="w-full h-[90%] flex items-center md:text-xs lg:text-sm xl:text-base  bg-Cream  mobile:flex-shrink-0 sm:flex-shrink-0 "
                     >
-                      <h1
-                        className={`flex items-center font-roxboroughnormal font-semibold  w-full ${
-                          opneorder.status <= index - 1
-                            ? "text-text_Color opacity-20 "
-                            : "text-text_Color"
-                        }`}
-                      >
-                        <FaCircleCheck className="mx-1" /> {status.status}
-                        {index !== statusData.length - 1 && (
-                          <FaLongArrowAltRight className="mx-1" />
-                        )}
-                      </h1>
+                        <p className="text-center w-full text-base font-Marcellus font-normal">This Order Is cancelled</p>
                     </div>
-                  ))}
+                  ) : (
+                    statusData.map((status, index) => (
+                      <div
+                        key={index}
+                        className="mobile:w-[50%] h-full flex items-center sm:w-[30%] md:w-[20%] md:text-xs lg:text-sm xl:text-base  bg-Cream  mobile:flex-shrink-0 sm:flex-shrink-0 "
+                      >
+                        <h1
+                          className={`flex items-center font-roxboroughnormal font-semibold  w-full ${
+                            opneorder.status <= index - 1
+                              ? "text-text_Color opacity-20 "
+                              : "text-text_Color"
+                          }`}
+                        >
+                          <FaCircleCheck className="mx-1" /> {status.status}
+                          {index !== statusData.length - 1 && (
+                            <FaLongArrowAltRight className="mx-1" />
+                          )}
+                        </h1>
+                      </div>
+                    ))
+                  )}
                 </div>
               </div>
             ))}
