@@ -552,3 +552,46 @@ html {
   /* Set your desired background color for error toasts */
   margin-top: 50px;
 }
+
+
+
+@layer utilities {
+  .custom-select {
+    @apply block w-full p-2.5 bg-text_Color2 text-white rounded-2xl border border-gray-300 shadow-sm focus:outline-none focus:ring-primary focus:border-primary;
+    appearance: none;
+    background-position: right 1rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5rem;
+    padding-right: 2.5rem;
+    /* Ensure space for the arrow */
+  }
+
+  .custom-select option {
+    @apply bg-white text-black py-3 font-Marcellus font-normal;
+  }
+
+  .custom-select-arrow {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'%3E%3Cpath d='M5.23 7.57a.75.75 0 011.06.02L10 11.25l3.71-3.66a.75.75 0 111.06 1.06l-4.25 4.2a.75.75 0 01-1.06 0l-4.25-4.2a.75.75 0 01.02-1.06z'/%3E%3C/svg%3E");
+  }
+
+  .focus\:ring-primary:focus {
+    @apply ring-2 ring-primary;
+  }
+}
+
+
+@keyframes dropdown-open {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.custom-select option {
+  animation: dropdown-open 0.3s ease-out;
+}

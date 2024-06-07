@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 
 const ProgressBar = ({ qunantityData, totalvalue , flag , displayKG }) => {
+
+  const isSingleItem = qunantityData?.SchemeValues?.length === 1;
+
+  console.log({isSingleItem})
+
   const [maxValue, setMaxValue] = useState();
   const [nextSlabe, setNextSlabe] = useState(0);
   const [nextValue, setNextValue] = useState(null);
 
 
   //  console.log("displayKG In ProgressBar" , displayKG)
-  //  console.log("qunantityData  " , qunantityData )
+   console.log("qunantityData  " , qunantityData )
 
   useEffect(() => {
     findMaxValue();
@@ -78,7 +83,7 @@ const ProgressBar = ({ qunantityData, totalvalue , flag , displayKG }) => {
         {qunantityData?.SchemeValues?.map((data, index) => (
           <div
             key={data._id}
-            className="w-full relative font-roxborough text-text_Color font-semibold text-lg"
+           className={`w-full relative font-roxborough text-text_Color font-semibold text-lg ${isSingleItem ? 'text-center mb-3' : ''}`}
           >
             {qunantityData?.SchemeValues?.length - 1 == index ? (
               <>

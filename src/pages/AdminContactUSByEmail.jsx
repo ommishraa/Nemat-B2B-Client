@@ -239,13 +239,13 @@ const AdminContactUSByEmail = () => {
                 href="https://maps.app.goo.gl/XdV5YEbN1uNgdnTw6"
                 target="_blank"
               >
-                <p className="hover:underline sm:text-center sm:mt-2 md:mt-4 sm:px-3 mobile:mt-2 mobile:px-3 font-Marcellus md:text-start md:px-0">
+                <p className="hover:underline mobile:text-center sm:text-center sm:mt-2 md:mt-4 sm:px-3 mobile:mt-2 mobile:px-3 font-Marcellus md:text-start md:px-0">
                   {admininfo.Address}
                 </p>
               </a>
               <p className="sm:mt-2 mobile:mt-2 md:mt-4 md:w-[100%] md:text-start font-Marcellus">
                 Customer Support: {""}
-                +91{admininfo.MobileNo}
+                +91 {admininfo.MobileNo}
               </p>
 
               <a
@@ -263,7 +263,7 @@ const AdminContactUSByEmail = () => {
             </div>
 
             <div className="mobile:w-[100%] text-text_Color font-Marcellus  mobile:mt-10 mobile:flex mobile:flex-col mobile:justify-center mobile:items-center mobile:mb-8 sm:w-[100%] sm:mt-10 sm:flex sm:flex-col sm:justify-center sm:items-center sm:mb-8  md:border-l-[1px] md:border-[#642F29] ">
-              <h1 className="mobile:uppercase mobile:text-xl  sm:uppercase font-roxborough sm:text-xl font-semibold md:w-[90%] md:text-start md:text-3xl text-text_Color">
+              <h1 className="mobile:text-3xl  font-roxborough sm:text-xl font-semibold md:w-[90%] md:text-start md:text-4xl overflow-y-hidden text-text_Color">
                 Write Us a Message
               </h1>
               <div className="w-[90%] mt-6">

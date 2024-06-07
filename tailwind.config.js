@@ -24,6 +24,7 @@ export default {
         CartRightColor: "#F6F5F0",
         borderColorBeige: "#C28E5E",
         hoverBGGreen: "#425711",
+        primary: "#3490dc",
       },
       screens: {
         mobile: "220px",

@@ -182,7 +182,7 @@ const ContactUs = () => {
               </a>
               <p className="sm:mt-2 mobile:mt-2 md:w-[100%] md:text-start font-Marcellus">
                 Customer Support: {""}
-                +91{admininfo.MobileNo}
+                +91 {admininfo.MobileNo}
               </p>
 
               <a
