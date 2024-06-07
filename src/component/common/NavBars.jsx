@@ -79,7 +79,7 @@ const NavBars = () => {
   const detailsMobile = [
     {
       id: 1,
-      title: "ABOUT",
+      title: "OUR STORY",
       link: "/ourfamily",
     },
     {
@@ -154,9 +154,15 @@ const NavBars = () => {
 
   const seriesPageById = (_id) => {
     navigate(`/series/${_id}`);
-    // SetShowNavbar(!showNavbar);
+    SetShowNavbar(!showNavbar);
     setIsHovered(false);
   };
+
+  const seriesPageByIdDesktop = (_id) => {
+    navigate(`/series/${_id}`);
+    // SetShowNavbar(!showNavbar);
+    setIsHovered(false);
+  }
 
   const logoutHandler = async () => {
     dispatch(setcategoryEmpty());
@@ -204,7 +210,7 @@ const NavBars = () => {
             {loading ? (
               <p>Loading....</p>
             ) : !showNavbar ? (
-              <div className="w-[100%] h-[100vh] bg-[#e9e9e9] mobile:overflow-hidden sm:overflow-hidden">
+              <div className="w-[100%] h-[100vh] bg-LightCream mobile:overflow-hidden sm:overflow-hidden">
                 <div className=" w-full flex  flex-nowrap justify-between  items-center  p-4">
                   <div className="flex gap-3 cursor-pointer">
                     <LuUser2
@@ -218,9 +224,9 @@ const NavBars = () => {
                       onClick={() => navigate("/search")}
                     />
                   </div>
-                  <div className="w-[143px] h-[66px]">
+                  <div className="w-[200px] h-[90px] mr-3">
                     <Link to={"/home"}>
-                      <img src={logo} className="w-full h-full " />
+                      <img src={logo} className="w-full h-full" />
                     </Link>
                   </div>
                   <IoClose
@@ -240,7 +246,7 @@ const NavBars = () => {
                         onClick={() => toggleSubSeries(category._id)}
                       >
                         <h1
-                          className="font-Marcellus text-text_Color text-2xl hover:underline "
+                          className="font-RoxboroughCFBold font-normal text-text_Color text-2xl hover:underline "
                           type="button"
                         >
                           {category.Name}
@@ -258,12 +264,12 @@ const NavBars = () => {
 
                       {selectedSeries === category._id && (
                         <div className="z-10 ">
-                          <ul className="py-2 text-base pl-3 font-Marcellus text-text_Color">
+                          <ul className="py-2 text-base pl-3 font-Marcellus font-normal text-text_Color">
                             {category.SubCategories &&
                               category.SubCategories.map((subcategories) => (
                                 <li
                                   key={subcategories._id}
-                                  className="hover:underline"
+                                  className="hover:underline pb-1"
                                   onClick={() =>
                                     seriesPageById(subcategories._id)
                                   }
@@ -303,9 +309,16 @@ const NavBars = () => {
                     className="w-[100%] md:w-[90%] flex flex-nowrap justify-between  items-center  m-auto px-5 relative "
                     onS
                   >
-                    <div className="md:hidden">
+                    <div className="md:hidden text-text_Color">
                       <Link to={"/cart"}>
-                        <AiOutlineShopping size={30} color="#642F29" />
+                        <div className="relative h-[50px] ">
+                          {totalCartValue !== 0 && (
+                            <span className="absolute left-[12px] text-text_Color font-Marcellus font-bold z-30 text-sm">
+                              {totalCartValue}
+                            </span>
+                          )}
+                          <AiOutlineShopping className="mt-[45%]" color="#642f29" size={30} />
+                        </div>
                       </Link>
                     </div>
                     <div className="flex gap-x-4 sm:hidden mobile:hidden md:flex lg:flex  font-Marcellus relative ">
@@ -328,7 +341,7 @@ const NavBars = () => {
                       </h1>
                       <Link to={"/ourfamily"}>
                         <h1 className="hover:underline text-text_Color font-Marcellus cursor-pointer font-medium">
-                          ABOUT
+                          OUR STORY
                         </h1>
                       </Link>
                       <Link to={"/contactus"}>
@@ -338,7 +351,7 @@ const NavBars = () => {
                       </Link>
                     </div>
 
-                    <div className="w-[175px] h-[90px] mr-[3.1%]">
+                    <div className="w-[200px] h-[90px] mobile:mr-[3.1%] sm:mr-[3.1%] md:mr-[6%]">
                       <Link to={"/home"}>
                         <img src={logo} className="w-full h-full " />
                       </Link>
@@ -360,7 +373,7 @@ const NavBars = () => {
                       <Link to={"/cart"}>
                         <div className="relative h-[50px]">
                           {totalCartValue !== 0 && (
-                            <span className="absolute left-[17px] text-text_Color font-Marcellus font-bold z-30 text-sm">
+                            <span className="absolute left-[10px] text-text_Color font-Marcellus font-bold z-30 text-sm">
                               {totalCartValue}
                             </span>
                           )}
@@ -395,7 +408,7 @@ const NavBars = () => {
                         >
                           <div className="flex justify-between items-center p-3 ">
                             <h1
-                              className=" font-Marcellus text-text_Color2 text-xl  "
+                              className=" font-RoxboroughCFBold font-normal text-text_Color text-xl  "
                               style={{ minHeight: "1.5em" }}
                             >
                               {category.Name}
@@ -403,14 +416,14 @@ const NavBars = () => {
                           </div>
 
                           <div className="pl-3 h-auto">
-                            <ul className="py-2 text-base font-Marcellus text-text_Color ">
+                            <ul className="py-2 text-base font-Marcellus font-normal text-text_Color ">
                               {category.SubCategories &&
                                 category.SubCategories.map((subcategories) => (
                                   <li
                                     key={subcategories._id}
-                                    className="hover:underline cursor-pointer pb-[5px]"
+                                    className="hover:underline cursor-pointer pb-[5px] py-1.5"
                                     onClick={() =>
-                                      seriesPageById(subcategories._id)
+                                      seriesPageByIdDesktop(subcategories._id)
                                     }
                                   >
                                     {subcategories.Name}
