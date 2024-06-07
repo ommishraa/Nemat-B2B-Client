@@ -11,7 +11,7 @@ import { PiUserLight } from "react-icons/pi";
 const Profile = () => {
 
 
-  const [clickedButton, setClickedButton] = useState("profile");
+  const [clickedButton, setClickedButton] = useState("order");
 
   const { user } = useSelector((store) => store.profile);
   const Company_Name = user.customer_CompanyName
